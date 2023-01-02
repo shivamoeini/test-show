@@ -4,7 +4,7 @@
 
 const row = document.querySelector(".contier")
 function loadjaon() {
-    fetch("https://api.tvmaze.com/shows/82/episodes")
+    fetch("https://api.tvmaze.com/search/shows?q=girls")
         .then(res => res.json())
         .then(data => {
             console.log(data);
@@ -13,14 +13,16 @@ function loadjaon() {
                 const card = document.createElement("div");
                 const img = document.createElement("img")
                 card.setAttribute("class", "card");
-                img.setAttribute("src", element.image.medium)
+                img.setAttribute("src", element.show.image.medium)
                 // console.log(element.show.image.medium);
                 card.append(img)
                 const nameshow = document.createElement("h5");
-                nameshow.append(element.name);
+                nameshow.append(element.show.name);
                 card.append(nameshow);
                 
-                document.innerHTML=             
+                const div=document.createElement("div");
+
+               div.innerHTML=             
                 `
                 <div class="accordion" id="accordionExample">
                 <div class="accordion-item">
@@ -31,14 +33,14 @@ function loadjaon() {
                     </h2>
                     <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
                     <div class="accordion-body">
-                          ${element.summary}
+                          ${element.show.summary}
                      </div>
                     </div>
                     </div>
                     </div>
                
                     `;
-                  
+                  card.append(div)
                     row.append(card)
      
             })
